@@ -2,11 +2,45 @@ import { getDatabase } from '../server/database';
 
 interface Env {}
 
+interface AuthUser {
+  id: string;
+  role: string;
+  status_akun?: string;
+  status_sertifikasi?: string;
+}
+
 const jsonResponse = (data: unknown, init?: ResponseInit) =>
   new Response(JSON.stringify(data), {
     headers: { 'content-type': 'application/json; charset=utf-8' },
     ...init,
   });
+
+const getAuthUser = (request: Request) => {
+  const authHeader = request.headers.get('authorization') || '';
+  const token = authHeader.startsWith('Bearer ') ? authHeader.slice(7) : null;
+  if (!token) return null;
+  const db = getDatabase();
+  const user = db.getUsers().find((u) => u.id === token);
+  if (!user || user.status_akun === 'nonaktif') return null;
+  return user as AuthUser;
+};
+
+const requireAuth = (request: Request) => {
+  const user = getAuthUser(request);
+  if (!user) {
+    return { user: null, response: jsonResponse({ error: 'Missing or invalid session' }, { status: 401 }) };
+  }
+  return { user, response: null };
+};
+
+const requireAdmin = (request: Request) => {
+  const auth = requireAuth(request);
+  if (auth.response) return auth;
+  if (auth.user?.role !== 'admin') {
+    return { user: null, response: jsonResponse({ error: 'Akses ditolak. Memerlukan peran Admin.' }, { status: 403 }) };
+  }
+  return auth;
+};
 
 export default {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
@@ -108,6 +142,107 @@ export default {
         created_at: new Date().toISOString(),
       } as any);
       return jsonResponse({ result: { ok: true, message: 'Assessment submitted' } });
+    }
+
+    if (path === '/api/sales/modules') {
+      const auth = requireAuth(request);
+      if (auth.response) return auth.response;
+      const db = getDatabase();
+      const modules = [...db.getModules()].sort((a, b) => a.urutan - b.urutan);
+      const progress = db.getProgress().filter((p) => p.user_id === auth.user?.id).map((p) => p.module_id);
+      return jsonResponse({ modules, completedIds: progress });
+    }
+
+    if (path === '/api/sales/modules/toggle') {
+      const auth = requireAuth(request);
+      if (auth.response) return auth.response;
+      if (auth.user?.status_sertifikasi !== 'lulus') {
+        return jsonResponse({ error: 'Akses ditolak. Anda harus lulus sertifikasi AAJI/AASI terlebih dahulu untuk membuka modul pembelajaran.' }, { status: 403 });
+      }
+      const body = await request.json().catch(() => ({}));
+      const db = getDatabase();
+      db.toggleProgress(auth.user!.id, body.moduleId, body.completed);
+      return jsonResponse({ success: true, message: body.completed ? 'Modul selesai dipelajari' : 'Progress modul direset' });
+    }
+
+    if (path === '/api/sales/leads') {
+      const auth = requireAuth(request);
+      if (auth.response) return auth.response;
+      const db = getDatabase();
+      let leads = db.getLeads();
+      if (auth.user?.role !== 'admin') {
+        leads = leads.filter((l) => l.sales_id === auth.user?.id);
+      }
+      const users = db.getUsers();
+      const enriched = leads.map((l) => ({ ...l, sales_nama: users.find((u) => u.id === l.sales_id)?.nama || 'Unknown Sales' }));
+      return jsonResponse({ leads: enriched, bookings: db.getBookings() });
+    }
+
+    if (path === '/api/sales/leads/update-status') {
+      const auth = requireAuth(request);
+      if (auth.response) return auth.response;
+      const body = await request.json().catch(() => ({}));
+      const db = getDatabase();
+      const lead = db.getLeads().find((l) => l.id === body.leadId);
+      if (!lead) return jsonResponse({ error: 'Lead tidak ditemukan' }, { status: 404 });
+      if (auth.user?.role !== 'admin' && lead.sales_id !== auth.user?.id) {
+        return jsonResponse({ error: 'Akses ditolak. Ini bukan lead Anda.' }, { status: 403 });
+      }
+      db.updateLead(body.leadId, { status_crm: body.status });
+      return jsonResponse({ message: 'Status pipeline CRM berhasil diperbarui' });
+    }
+
+    if (path === '/api/sales/profile') {
+      const auth = requireAuth(request);
+      if (auth.response) return auth.response;
+      const body = await request.json().catch(() => ({}));
+      const db = getDatabase();
+      const updates: any = {};
+      if (body.nama) updates.nama = body.nama;
+      if (body.web3forms_key !== undefined) updates.web3forms_key = body.web3forms_key;
+      if (body.password) updates.password_hash = body.password;
+      if (body.avatar_url !== undefined) updates.avatar_url = body.avatar_url;
+      if (body.whatsapp_link !== undefined) updates.whatsapp_link = body.whatsapp_link;
+      if (body.schedule_availability !== undefined) updates.schedule_availability = body.schedule_availability;
+      db.updateUser(auth.user!.id, updates);
+      return jsonResponse({ message: 'Profil berhasil diperbarui', user: db.getUsers().find((u) => u.id === auth.user!.id) });
+    }
+
+    if (path === '/api/admin/users') {
+      const auth = requireAdmin(request);
+      if (auth.response) return auth.response;
+      return jsonResponse({ users: getDatabase().getUsers() });
+    }
+
+    if (path === '/api/admin/questions') {
+      const auth = requireAdmin(request);
+      if (auth.response) return auth.response;
+      return jsonResponse({ questions: getDatabase().getQuestions(), options: getDatabase().getOptions() });
+    }
+
+    if (path === '/api/admin/settings') {
+      const auth = requireAdmin(request);
+      if (auth.response) return auth.response;
+      const db = getDatabase();
+      return jsonResponse({ settings: Object.fromEntries(db.getSettings().map((s) => [s.key, s.value])) });
+    }
+
+    if (path === '/api/admin/modules') {
+      const auth = requireAdmin(request);
+      if (auth.response) return auth.response;
+      return jsonResponse({ modules: getDatabase().getModules() });
+    }
+
+    if (path === '/api/admin/leads') {
+      const auth = requireAdmin(request);
+      if (auth.response) return auth.response;
+      return jsonResponse({ leads: getDatabase().getLeads(), bookings: getDatabase().getBookings() });
+    }
+
+    if (path === '/api/admin/audit-logs') {
+      const auth = requireAdmin(request);
+      if (auth.response) return auth.response;
+      return jsonResponse({ auditLogs: getDatabase().getAuditLogs() });
     }
 
     return jsonResponse({ error: 'Not found' }, { status: 404 });
