@@ -1,0 +1,356 @@
+{
+  "users": [
+    {
+      "id": "admin-id",
+      "email": "bxma.info@gmail.com",
+      "password_hash": "admin1203$",
+      "nama": "Admin Samoia",
+      "role": "admin",
+      "status_akun": "aktif",
+      "status_sertifikasi": "lulus",
+      "referral_code": "ADMIN",
+      "google_calendar_connected": true,
+      "created_at": "2026-07-16T15:43:12.513Z"
+    },
+    {
+      "id": "u-1784217486777-p6b17",
+      "email": "yandrabima@gmail.com",
+      "password_hash": "Ybima1203$",
+      "nama": "Bima",
+      "role": "sales",
+      "status_akun": "aktif",
+      "status_sertifikasi": "lulus",
+      "referral_code": "BIMA461",
+      "google_calendar_connected": false,
+      "created_at": "2026-07-16T15:58:06.777Z",
+      "web3forms_key": "",
+      "avatar_url": "",
+      "whatsapp_link": ""
+    }
+  ],
+  "leads": [],
+  "assessment_questions": [
+    {
+      "id": "q1",
+      "pertanyaan_text": "Apa status pekerjaan atau sumber penghasilan utama Anda saat ini? (NO SCORE)",
+      "urutan": 1,
+      "is_scored": false,
+      "scoring_group": "segmentasi",
+      "status": "aktif",
+      "created_at": "2026-07-16T20:37:55.344Z",
+      "updated_at": "2026-07-16T20:37:55.345Z"
+    },
+    {
+      "id": "q2",
+      "pertanyaan_text": "Bagaimana perasaan Anda tentang kondisi finansial Anda & keluarga saat ini?",
+      "urutan": 2,
+      "is_scored": true,
+      "scoring_group": "kategori_utama",
+      "status": "aktif",
+      "created_at": "2026-07-16T20:37:55.345Z",
+      "updated_at": "2026-07-16T20:37:55.345Z"
+    },
+    {
+      "id": "q3",
+      "pertanyaan_text": "Jika penghasilan utama Anda terhenti tiba-tiba HARI INI, berapa lama Anda & keluarga bisa bertahan dengan tabungan/aset yang ada?",
+      "urutan": 3,
+      "is_scored": true,
+      "scoring_group": "kategori_utama",
+      "status": "aktif",
+      "created_at": "2026-07-16T20:37:55.345Z",
+      "updated_at": "2026-07-16T20:37:55.345Z"
+    },
+    {
+      "id": "q4",
+      "pertanyaan_text": "Jika Anda sebagai pencari nafkah utama tiba-tiba tidak bisa lagi bekerja (sakit kritis atau meninggal), siapa yang akan langsung terdampak secara finansial?",
+      "urutan": 4,
+      "is_scored": true,
+      "scoring_group": "kategori_utama",
+      "status": "aktif",
+      "created_at": "2026-07-16T20:37:55.345Z",
+      "updated_at": "2026-07-16T20:37:55.345Z"
+    },
+    {
+      "id": "q5",
+      "pertanyaan_text": "Dari semua kemungkinan ini, mana yang membuat Anda paling tidak bisa tidur nyenyak kalau dipikirkan?",
+      "urutan": 5,
+      "is_scored": true,
+      "scoring_group": "kategori_utama",
+      "status": "aktif",
+      "created_at": "2026-07-16T20:37:55.345Z",
+      "updated_at": "2026-07-16T20:37:55.345Z"
+    },
+    {
+      "id": "q6",
+      "pertanyaan_text": "Seberapa lengkap proteksi keuangan Anda saat ini, khususnya untuk risiko kesehatan/penyakit kritis dan risiko kematian?",
+      "urutan": 6,
+      "is_scored": true,
+      "scoring_group": "kategori_utama",
+      "status": "aktif",
+      "created_at": "2026-07-16T20:37:55.345Z",
+      "updated_at": "2026-07-16T20:37:55.345Z"
+    }
+  ],
+  "assessment_options": [
+    {
+      "id": "o1_1",
+      "question_id": "q1",
+      "label_text": "A) Karyawan Tetap (Swasta / Pemerintah / BUMN)",
+      "skor_value": 0,
+      "urutan": 1
+    },
+    {
+      "id": "o1_2",
+      "question_id": "q1",
+      "label_text": "B) Profesional Mandiri / Freelancer (klien berganti-ganti)",
+      "skor_value": 0,
+      "urutan": 2
+    },
+    {
+      "id": "o1_3",
+      "question_id": "q1",
+      "label_text": "C) Pengusaha / Pemilik Bisnis (punya karyawan)",
+      "skor_value": 0,
+      "urutan": 3
+    },
+    {
+      "id": "o1_4",
+      "question_id": "q1",
+      "label_text": "D) Lainnya (pelajar, mahasiswa, atau status lain)",
+      "skor_value": 0,
+      "urutan": 4
+    },
+    {
+      "id": "o2_1",
+      "question_id": "q2",
+      "label_text": "A) Sangat stabil & aman — Sudah ada tabungan & proteksi memadai.",
+      "skor_value": 1,
+      "urutan": 1
+    },
+    {
+      "id": "o2_2",
+      "question_id": "q2",
+      "label_text": "B) Cukup stabil, tapi ada pikiran — Aman secara umum, tapi suka kepikiran risiko tak terduga.",
+      "skor_value": 2,
+      "urutan": 2
+    },
+    {
+      "id": "o2_3",
+      "question_id": "q2",
+      "label_text": "C) Kadang stabil, kadang tidak — Penghasilan naik-turun, sulit bikin rencana jangka panjang.",
+      "skor_value": 3,
+      "urutan": 3
+    },
+    {
+      "id": "o2_4",
+      "question_id": "q2",
+      "label_text": "D) Butuh perbaikan — Cicilan/kewajiban besar, khawatir gak bisa penuhi kebutuhan.",
+      "skor_value": 4,
+      "urutan": 4
+    },
+    {
+      "id": "o3_1",
+      "question_id": "q3",
+      "label_text": "A) Lebih dari 5 tahun",
+      "skor_value": 1,
+      "urutan": 1
+    },
+    {
+      "id": "o3_2",
+      "question_id": "q3",
+      "label_text": "B) 1–5 tahun",
+      "skor_value": 2,
+      "urutan": 2
+    },
+    {
+      "id": "o3_3",
+      "question_id": "q3",
+      "label_text": "C) Kurang dari 1 tahun",
+      "skor_value": 3,
+      "urutan": 3
+    },
+    {
+      "id": "o3_4",
+      "question_id": "q3",
+      "label_text": "D) Kurang dari 6 bulan",
+      "skor_value": 4,
+      "urutan": 4
+    },
+    {
+      "id": "o4_1",
+      "question_id": "q4",
+      "label_text": "A) Hanya saya pribadi — belum ada tanggungan.",
+      "skor_value": 1,
+      "urutan": 1
+    },
+    {
+      "id": "o4_2",
+      "question_id": "q4",
+      "label_text": "B) Pasangan / keluarga inti — masa depan mereka bergantung ke saya.",
+      "skor_value": 2,
+      "urutan": 2
+    },
+    {
+      "id": "o4_3",
+      "question_id": "q4",
+      "label_text": "C) Orang tua / saudara — mereka bergantung pada bantuan saya.",
+      "skor_value": 3,
+      "urutan": 3
+    },
+    {
+      "id": "o4_4",
+      "question_id": "q4",
+      "label_text": "D) Semua di atas — pasangan, anak, DAN orang tua/saudara bergantung ke saya.",
+      "skor_value": 4,
+      "urutan": 4
+    },
+    {
+      "id": "o5_1",
+      "question_id": "q5",
+      "label_text": "A) Kehilangan pekerjaan / sumber penghasilan secara tiba-tiba.",
+      "skor_value": 1,
+      "urutan": 1
+    },
+    {
+      "id": "o5_2",
+      "question_id": "q5",
+      "label_text": "B) Terkena risiko kesehatan / penyakit kritis yang butuh biaya pengobatan besar.",
+      "skor_value": 2,
+      "urutan": 2
+    },
+    {
+      "id": "o5_3",
+      "question_id": "q5",
+      "label_text": "C) Meninggal mendadak dan keluarga ditinggalkan tanpa pendapatan.",
+      "skor_value": 3,
+      "urutan": 3
+    },
+    {
+      "id": "o5_4",
+      "question_id": "q5",
+      "label_text": "D) Salah kelola keuangan sehingga masa depan keluarga tidak terjamin.",
+      "skor_value": 4,
+      "urutan": 4
+    },
+    {
+      "id": "o6_1",
+      "question_id": "q6",
+      "label_text": "A) Sangat lengkap — Sudah ada dana dana darurat, asuransi jiwa, kesehatan, & penyakit kritis.",
+      "skor_value": 1,
+      "urutan": 1
+    },
+    {
+      "id": "o6_2",
+      "question_id": "q6",
+      "label_text": "B) Cukup lengkap — Sudah ada asuransi dasar, tapi rasa masih ada celah.",
+      "skor_value": 2,
+      "urutan": 2
+    },
+    {
+      "id": "o6_3",
+      "question_id": "q6",
+      "label_text": "C) Kurang lengkap — Hanya punya asuransi dari kantor atau BPJS saja.",
+      "skor_value": 3,
+      "urutan": 3
+    },
+    {
+      "id": "o6_4",
+      "question_id": "q6",
+      "label_text": "D) Belum ada sama sekali — Belum jadi prioritas sejauh ini.",
+      "skor_value": 4,
+      "urutan": 4
+    }
+  ],
+  "modules": [
+    {
+      "id": "m1",
+      "judul": "Samoia Core Sales Principles - Volume 1",
+      "youtube_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "urutan": 1
+    },
+    {
+      "id": "m2",
+      "judul": "Dynamic Financial Assessment Framework Integration",
+      "youtube_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "urutan": 2
+    },
+    {
+      "id": "m3",
+      "judul": "Closing High-Net-Worth Prospects with Wealth Snapshots",
+      "youtube_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "urutan": 3
+    }
+  ],
+  "module_progress": [],
+  "calendar_bookings": [],
+  "settings": [
+    {
+      "key": "assessment_judul",
+      "value": "Samoia Consulting — Personal Wealth & Risk Analysis v2"
+    },
+    {
+      "key": "assessment_subheadline",
+      "value": "Evaluate your dynamic financial security index, identify protection gaps, and book an exclusive Zoom strategy session with your personal consultant."
+    },
+    {
+      "key": "teks_pitch",
+      "value": "Samoia Consulting specializes in high-class wealth preservation, custom risk-management frameworks, and private financial planning for elite sales forces."
+    },
+    {
+      "key": "kebijakan_privasi",
+      "value": "We strictly comply with the Personal Data Protection (PDP) act. Your assessment snapshots and financial inputs are encrypted and only accessible to your designated Samoia professional consultant."
+    },
+    {
+      "key": "discord_invite_link",
+      "value": "https://discord.gg/samoia-consulting"
+    },
+    {
+      "key": "skor_kategori_thresholds",
+      "value": "[{\"name\":\"Sangat Rentan\",\"min_percent\":0,\"max_percent\":35},{\"name\":\"Rentan\",\"min_percent\":36,\"max_percent\":60},{\"name\":\"Cukup Aman\",\"min_percent\":61,\"max_percent\":85},{\"name\":\"Sangat Aman\",\"min_percent\":86,\"max_percent\":100}]"
+    },
+    {
+      "key": "server_status",
+      "value": "online"
+    }
+  ],
+  "audit_logs": [
+    {
+      "admin_id": "admin-id",
+      "admin_nama": "Admin Samoia",
+      "action_type": "UPDATE_QUESTION",
+      "target_type": "assessment_questions",
+      "target_id": "q6",
+      "detail": {
+        "text": "Kalau harus menebak, menurut Anda hasil assessment finansial Anda nanti akan menunjukkan apa?"
+      },
+      "id": "audit-1784226530775-dmv73",
+      "created_at": "2026-07-16T18:28:50.775Z"
+    },
+    {
+      "admin_id": "admin-id",
+      "admin_nama": "Admin Samoia",
+      "action_type": "APPROVE_USER",
+      "target_type": "users",
+      "target_id": "u-1784217486777-p6b17",
+      "detail": {
+        "referral_code": "BIMA461",
+        "email": "yandrabima@gmail.com"
+      },
+      "id": "audit-1784218173885-iq1mb",
+      "created_at": "2026-07-16T16:09:33.885Z"
+    },
+    {
+      "admin_id": "admin-id",
+      "admin_nama": "Admin Samoia",
+      "action_type": "UPDATE_CERTIFICATION",
+      "target_type": "users",
+      "target_id": "u-1784217486777-p6b17",
+      "detail": {
+        "status_sertifikasi": "lulus",
+        "email": "yandrabima@gmail.com"
+      },
+      "id": "audit-1784217511587-xfbm5",
+      "created_at": "2026-07-16T15:58:31.587Z"
+    }
+  ]
+}

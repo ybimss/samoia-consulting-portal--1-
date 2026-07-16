@@ -1,0 +1,6 @@
+{
+  "name": "Samoia Consulting Portal",
+  "description": "Private internal portal for Samoia Consulting sales teams, featuring learning modules, CRM, leaderboard, Zoom booking, and dynamic financial assessments.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

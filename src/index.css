@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Alex+Brush&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --font-script: "Alex Brush", cursive;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+/* Custom scrollbar hiding for clean tabs layout */
+.scroller-hidden::-webkit-scrollbar {
+  display: none;
+}
+.scroller-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Edgy Monochrome Gradients and Glows */
+.bg-edgy-gradient {
+  background: radial-gradient(circle at top, #161616 0%, #080808 100%);
+}
+
+.text-gold-copper {
+  color: #c5a880;
+  text-shadow: 0 0 12px rgba(197, 168, 128, 0.2);
+}
+
+.border-gold-copper {
+  border-color: rgba(197, 168, 128, 0.25);
+}
+
+@media print {
+  body {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    background: white !important;
+    color: black !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+  .print-container {
+    position: static !important;
+    overflow: visible !important;
+    height: auto !important;
+    width: 100% !important;
+    max-width: none !important;
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+}
+
