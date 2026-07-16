@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "samoia-consulting",
+  "name": "samoia-consulting-portal",
   "compatibility_date": "2025-01-01",
   "main": "./workers/index.ts",
   "assets": {
