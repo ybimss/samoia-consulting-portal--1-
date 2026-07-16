@@ -388,4 +388,13 @@ export class Database {
   }
 }
 
-export const db = new Database();
+let dbInstance: Database | null = null;
+
+export function getDatabase() {
+  if (!dbInstance) {
+    dbInstance = new Database();
+  }
+  return dbInstance;
+}
+
+export const db = getDatabase();
