@@ -3,14 +3,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import fs from 'fs';
-import path from 'path';
 import { 
   User, Lead, AssessmentQuestion, AssessmentOption, 
   Module, ModuleProgress, CalendarBooking, Setting, AuditLog 
 } from '../src/types';
-
-const DB_FILE = path.join(process.cwd(), 'database.json');
 
 interface DatabaseSchema {
   users: User[];
@@ -166,22 +162,23 @@ export class Database {
   }
 
   private load() {
-    try {
-      if (fs.existsSync(DB_FILE)) {
-        const fileContent = fs.readFileSync(DB_FILE, 'utf-8');
-        this.data = JSON.parse(fileContent);
-      }
-    } catch (error) {
-      console.error('Error loading database, re-initializing empty:', error);
-    }
+    // Cloudflare Workers and static deployments do not have filesystem access.
+    // The database is initialized in memory and seeded on startup.
+    this.data = {
+      users: [],
+      leads: [],
+      assessment_questions: [],
+      assessment_options: [],
+      modules: [],
+      module_progress: [],
+      calendar_bookings: [],
+      settings: [],
+      audit_logs: []
+    };
   }
 
   private save() {
-    try {
-      fs.writeFileSync(DB_FILE, JSON.stringify(this.data, null, 2), 'utf-8');
-    } catch (error) {
-      console.error('Error saving database:', error);
-    }
+    // No-op: persistence is in-memory for Cloudflare Workers deployments.
   }
 
   private seed() {
