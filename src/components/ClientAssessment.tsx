@@ -46,6 +46,10 @@ export default function ClientAssessment({ referralCode }: ClientAssessmentProps
   // Dynamic Answers: Record<questionId, optionId>
   const [jawabanRaw, setJawabanRaw] = useState<Record<string, string>>(() => JSON.parse(localStorage.getItem('samoia_jawabanRaw') || '{}'));
   const [skorPrediksiDiri, setSkorPrediksiDiri] = useState<number>(() => Number(localStorage.getItem('samoia_skorPrediksiDiri')) || 20); // default Rentan equivalent
+  const [bookingDate, setBookingDate] = useState(() => localStorage.getItem('samoia_bookingDate') || '');
+  const [bookingTime, setBookingTime] = useState(() => localStorage.getItem('samoia_bookingTime') || '');
+  const [honeypot, setHoneypot] = useState('');
+  const [consent, setConsent] = useState(() => localStorage.getItem('samoia_consent') === 'true');
   
   // Persist changes
   useEffect(() => {
